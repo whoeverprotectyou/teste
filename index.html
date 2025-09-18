@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="pt-BR">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Auxílio by @JM360hz</title>
@@ -144,7 +144,7 @@
 </head>
 <body>
   <!-- fundo partículas -->
-  <div id="particles-js"><canvas class="particles-js-canvas-el" style="width: 100%; height: 100%;" width="881" height="782"></canvas></div>
+  <div id="particles-js"></div>
 
   <div class="container">
     <h1>AUXILIO BY @JM360HZ</h1>
@@ -152,10 +152,10 @@
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
     
     <label>
-      <input type="checkbox" id="fps" onchange="toggleFPS()"> Ativar FPS
+      <input type="checkbox" id="fps" checked onchange="toggleFPS()"> Ativar FPS
     </label>
     <label>
-      <input type="checkbox" id="precisao" onchange="togglePrecisao()"> Ativar Precisão
+      <input type="checkbox" id="precisao" checked onchange="togglePrecisao()"> Ativar Precisão
     </label>
 
     <label for="rangePrecisao">Precisão</label>
@@ -164,7 +164,7 @@
     <div id="valorPrecisao">Precisão: 8</div>
 
     <select id="auxilio" onchange="mostrarMensagem('Auxílio selecionado: ' + this.value)">
-      <option selected="selected">Auxílio Head</option>
+      <option>Auxílio Head</option>
       <option>Auxílio Body</option>
       <option>Auxílio Full</option>
     </select>
@@ -210,7 +210,7 @@
   </script>
 
   <!-- particles.js -->
-  <script src="Aux%C3%ADlio%20by%20@JM360hz_arquivos/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
       particles: {
@@ -236,6 +236,5 @@
       retina_detect: true
     });
   </script>
-
-
-</body></html>
+</body>
+</html>
