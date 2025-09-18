@@ -171,9 +171,9 @@
     </label>
 
     <label for="rangePrecisao">Precisão</label>
-    <input type="range" id="rangePrecisao" min="1" max="10" value="8" oninput="mostrarPrecisao(this.value)">
+    <input type="range" id="rangePrecisao" min="1" max="10" value="5" oninput="mostrarPrecisao(this.value)">
     <div id="barraPrecisao"><span></span></div>
-    <div id="valorPrecisao">Precisão: 8</div>
+    <div id="valorPrecisao">Precisão: 5</div>
 
     <select id="auxilio" onchange="mostrarMensagem('Auxílio selecionado: ' + this.value)">
       <option>Auxílio Head</option>
@@ -223,11 +223,11 @@
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 90 },
+        number: { value: 150 },
         color: { value: "#00aaff" },
         shape: { type: "circle" },
         opacity: { value: 0.5 },
-        size: { value: 3 },
+        size: { value: 2 },
         line_linked: {
           enable: true,
           distance: 200,
@@ -247,3 +247,4 @@
   </script>
 </body>
 </html>
+
