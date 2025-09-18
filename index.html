@@ -22,19 +22,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
-    }
-
-    /* logo centralizada no fundo */
-    .logo-fundo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;       /* ajuste de tamanho */
-      opacity: 0.08;      /* opacidade baixa */
-      z-index: -1;        /* acima das partículas, atrás do conteúdo */
-      pointer-events: none; /* não interfere em cliques */
+      z-index: -1;
     }
 
     .container {
@@ -47,6 +35,13 @@
       position: relative;
       z-index: 1;
       box-shadow: 0 0 20px rgba(0,170,255,0.4);
+    }
+
+    .logo {
+      width: 120px;
+      margin: 0 auto 15px auto;
+      opacity: 0.7;
+      display: block;
     }
 
     h1 {
@@ -105,6 +100,7 @@
       margin-top: 20px;
     }
 
+    /* Popup estilizado */
     .popup {
       position: fixed;
       top: 20px;
@@ -125,6 +121,7 @@
       transform: translateY(0);
     }
 
+    /* Histórico */
     #historico {
       margin-top: 20px;
       text-align: left;
@@ -136,6 +133,7 @@
       padding-top: 10px;
     }
 
+    /* Medidor de precisão */
     #barraPrecisao {
       height: 10px;
       background: #222;
@@ -153,12 +151,12 @@
   </style>
 </head>
 <body>
+  <!-- fundo partículas -->
   <div id="particles-js"></div>
 
-  <!-- logo centralizada -->
-  <img src="https://i.imgur.com/SEU_LINK_DIRETO.png" alt="Logo JM360hz" class="logo-fundo">
-
   <div class="container">
+    <img src="https://i.imgur.com/w1P3wRz.png" alt="Logo" class="logo">
+
     <h1>AUXILIO BY @JM360HZ</h1>
 
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
@@ -171,9 +169,9 @@
     </label>
 
     <label for="rangePrecisao">Precisão</label>
-    <input type="range" id="rangePrecisao" min="1" max="10" value="5" oninput="mostrarPrecisao(this.value)">
+    <input type="range" id="rangePrecisao" min="1" max="10" value="8" oninput="mostrarPrecisao(this.value)">
     <div id="barraPrecisao"><span></span></div>
-    <div id="valorPrecisao">Precisão: 5</div>
+    <div id="valorPrecisao">Precisão: 8</div>
 
     <select id="auxilio" onchange="mostrarMensagem('Auxílio selecionado: ' + this.value)">
       <option>Auxílio Head</option>
@@ -188,6 +186,7 @@
     <div id="historico"><b>Histórico:</b></div>
   </div>
 
+  <!-- Popup -->
   <div id="popup" class="popup"></div>
 
   <script>
@@ -197,6 +196,7 @@
       popup.classList.add("show");
       setTimeout(() => popup.classList.remove("show"), 2000);
 
+      // adiciona ao histórico
       let historico = document.getElementById("historico");
       let item = document.createElement("div");
       item.innerText = "• " + texto;
@@ -219,15 +219,16 @@
     }
   </script>
 
+  <!-- particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
       particles: {
-        number: { value: 150 },
+        number: { value: 100 },
         color: { value: "#00aaff" },
         shape: { type: "circle" },
         opacity: { value: 0.5 },
-        size: { value: 2 },
+        size: { value: 3 },
         line_linked: {
           enable: true,
           distance: 200,
@@ -235,7 +236,7 @@
           opacity: 0.4,
           width: 1
         },
-        move: { enable: true, speed: 3 }
+        move: { enable: true, speed: 1 }
       },
       interactivity: {
         detect_on: "canvas",
@@ -247,4 +248,3 @@
   </script>
 </body>
 </html>
-
