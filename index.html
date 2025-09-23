@@ -138,7 +138,7 @@
       <option>Auxílio Full</option>
     </select>
 
-    <!-- botão modificado: tenta abrir app / app store / fallback -->
+    <!-- botão modificado: agora abre Free Fire MAX -->
     <button class="inject" onclick="abrirFreeFire()">INJETAR FUNÇÕES NO JOGO</button>
 
     <div id="historico"><b>Histórico:</b></div>
@@ -181,14 +181,15 @@
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
     }
 
+    /* ---- Abrir Free Fire MAX ---- */
     function abrirFreeFire() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
-      const appStore = "https://apps.apple.com/app/free-fire/id1300146617";
-      const officialSite = "https://ff.garena.com/";
+      const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefiremax"; 
+      const appStore = "https://apps.apple.com/app/free-fire-max/id1480517681"; 
+      const officialSite = "https://ffmax.garena.com/"; 
 
       if (/android/i.test(ua)) {
-        const intentUrl = "intent://details?id=com.dts.freefireth#Intent;package=com.android.vending;scheme=market;end";
+        const intentUrl = "intent://details?id=com.dts.freefiremax#Intent;package=com.android.vending;scheme=market;end";
         window.location = intentUrl;
         setTimeout(function() { window.location = playStoreWeb; }, 1000);
       } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
@@ -197,7 +198,7 @@
         window.open(officialSite, "_blank");
       }
 
-      mostrarMensagem("Tentando abrir Free Fire / redirecionando para a loja...");
+      mostrarMensagem("Tentando abrir Free Fire MAX / redirecionando para a loja...");
     }
   </script>
 
