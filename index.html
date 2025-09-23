@@ -33,7 +33,7 @@
       position: relative;
       z-index: 1;
       box-shadow: 0 0 20px rgba(0,170,255,0.4);
-      display: none; /* só aparece depois do login */
+      display: none;
     }
 
     h1 { color: #00aaff; margin-bottom: 20px; }
@@ -70,7 +70,6 @@
 
     .inject { background: #00aaff; color: black; font-size: 16px; margin-top: 20px; }
 
-    /* Marca d'água */
     .watermark {
       position: fixed;
       bottom: 10px;
@@ -82,7 +81,6 @@
       z-index: 5;
     }
 
-    /* Tela de login */
     .login-container {
       background: rgba(22, 27, 34, 0.95);
       border-radius: 15px;
@@ -99,19 +97,15 @@
       border: none; background: #111; color: #00aaff;
     }
 
-    /* Barra de precisão */
     #barraPrecisao { height: 10px; background: #222; border-radius: 5px; margin: 8px 0; overflow: hidden; }
     #barraPrecisao span { display: block; height: 100%; width: 0%; background: #00aaff; transition: width 0.3s ease; }
 
-    /* Popup simples (histórico já existente) */
     #historico { margin-top: 10px; text-align: left; color: #aaa; font-size: 14px; max-height: 120px; overflow-y: auto; border-top: 1px solid rgba(0,170,255,0.3); padding-top: 10px; }
   </style>
 </head>
 <body>
-  <!-- fundo partículas -->
   <div id="particles-js"></div>
 
-  <!-- Tela de login -->
   <div class="login-container" id="login">
     <h2>Login</h2>
     <input type="text" id="usuario" placeholder="Usuário">
@@ -119,7 +113,6 @@
     <button onclick="login()">Entrar</button>
   </div>
 
-  <!-- Conteúdo -->
   <div class="container" id="conteudo">
     <h1>AUXILIO BY ZJM</h1>
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
@@ -138,13 +131,11 @@
       <option>Auxílio Full</option>
     </select>
 
-    <!-- botão modificado: agora abre Free Fire MAX -->
     <button class="inject" onclick="abrirFreeFire()">INJETAR FUNÇÕES NO JOGO</button>
 
     <div id="historico"><b>Histórico:</b></div>
   </div>
 
-  <!-- Marca d'água -->
   <div class="watermark">AUXILIO BY ZJM</div>
 
   <script>
@@ -181,7 +172,6 @@
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
     }
 
-    /* ---- Abrir Free Fire MAX ---- */
     function abrirFreeFire() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
       const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefiremax"; 
@@ -189,20 +179,18 @@
       const officialSite = "https://ffmax.garena.com/"; 
 
       if (/android/i.test(ua)) {
-        const intentUrl = "intent://details?id=com.dts.freefiremax#Intent;package=com.android.vending;scheme=market;end";
-        window.location = intentUrl;
-        setTimeout(function() { window.location = playStoreWeb; }, 1000);
+        window.location.href = "intent://launch/#Intent;package=com.dts.freefiremax;end";
+        setTimeout(() => { window.location.href = playStoreWeb; }, 1500);
       } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        window.location = appStore;
+        window.location.href = appStore;
       } else {
         window.open(officialSite, "_blank");
       }
 
-      mostrarMensagem("Tentando abrir Free Fire MAX / redirecionando para a loja...");
+      mostrarMensagem("Abrindo Free Fire MAX...");
     }
   </script>
 
-  <!-- particles.js -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     particlesJS("particles-js", {
