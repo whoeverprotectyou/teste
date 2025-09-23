@@ -131,7 +131,7 @@
       <option>Auxílio Full</option>
     </select>
 
-    <button class="inject" onclick="abrirFreeFire()">INJETAR FUNÇÕES NO JOGO</button>
+    <button class="inject" onclick="injetarFuncoes()">INJETAR FUNÇÕES NO JOGO</button>
 
     <div id="historico"><b>Histórico:</b></div>
   </div>
@@ -172,13 +172,8 @@
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
     }
 
-   <script>
-  function abrirFreeFire() {
-    // Apenas registra no histórico, não tenta abrir app
-    mostrarMensagem("Funções injetadas com sucesso!");
-  }
-</script>
-
+    function injetarFuncoes() {
+      mostrarMensagem("✅ Funções injetadas com sucesso!");
     }
   </script>
 
@@ -210,4 +205,3 @@
   </script>
 </body>
 </html>
-
