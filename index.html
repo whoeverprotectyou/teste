@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Auxílio by @JM360hz</title>
   <style>
     body {
@@ -36,10 +36,7 @@
       display: none; /* só aparece depois do login */
     }
 
-    h1 {
-      color: #00aaff;
-      margin-bottom: 20px;
-    }
+    h1 { color: #00aaff; margin-bottom: 20px; }
 
     button {
       display: block;
@@ -54,25 +51,11 @@
       cursor: pointer;
       transition: 0.2s;
     }
+    button:hover { transform: scale(1.05); background: #0090dd; }
 
-    button:hover {
-      transform: scale(1.05);
-      background: #0090dd;
-    }
-
-    label {
-      display: block;
-      margin: 10px 0;
-      color: white;
-    }
-
-    input[type="checkbox"], input[type="text"], input[type="password"] {
-      margin: 5px 0;
-    }
-
-    input[type="range"] {
-      width: 100%;
-    }
+    label { display: block; margin: 10px 0; color: white; }
+    input[type="checkbox"], input[type="text"], input[type="password"] { margin: 5px 0; }
+    input[type="range"] { width: 100%; }
 
     select {
       width: 100%;
@@ -85,12 +68,7 @@
       font-weight: bold;
     }
 
-    .inject {
-      background: #00aaff;
-      color: black;
-      font-size: 16px;
-      margin-top: 20px;
-    }
+    .inject { background: #00aaff; color: black; font-size: 16px; margin-top: 20px; }
 
     /* Marca d'água */
     .watermark {
@@ -115,37 +93,18 @@
       text-align: center;
       box-shadow: 0 0 20px rgba(0,170,255,0.4);
     }
-
-    .login-container h2 {
-      margin-bottom: 15px;
-      color: #00aaff;
-    }
-
+    .login-container h2 { margin-bottom: 15px; color: #00aaff; }
     .login-container input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: none;
-      background: #111;
-      color: #00aaff;
+      width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px;
+      border: none; background: #111; color: #00aaff;
     }
 
     /* Barra de precisão */
-    #barraPrecisao {
-      height: 10px;
-      background: #222;
-      border-radius: 5px;
-      margin: 8px 0;
-      overflow: hidden;
-    }
-    #barraPrecisao span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: #00aaff;
-      transition: width 0.3s ease;
-    }
+    #barraPrecisao { height: 10px; background: #222; border-radius: 5px; margin: 8px 0; overflow: hidden; }
+    #barraPrecisao span { display: block; height: 100%; width: 0%; background: #00aaff; transition: width 0.3s ease; }
+
+    /* Popup simples (histórico já existente) */
+    #historico { margin-top: 10px; text-align: left; color: #aaa; font-size: 14px; max-height: 120px; overflow-y: auto; border-top: 1px solid rgba(0,170,255,0.3); padding-top: 10px; }
   </style>
 </head>
 <body>
@@ -162,9 +121,10 @@
 
   <!-- Conteúdo -->
   <div class="container" id="conteudo">
+    <img src="https://i.imgur.com/BKuB57R.png" alt="Logo" style="width:120px; display:block; margin: 0 auto 8px auto; opacity:0.8;">
     <h1>AUXILIO BY @JM360HZ</h1>
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
-    
+
     <label><input type="checkbox" id="fps" onchange="toggleFPS()"> Ativar FPS</label>
     <label><input type="checkbox" id="precisao" onchange="togglePrecisao()"> Ativar Precisão</label>
 
@@ -179,7 +139,9 @@
       <option>Auxílio Full</option>
     </select>
 
-    <button class="inject" onclick="mostrarMensagem('Funções injetadas')">INJETAR FUNÇÕES NO JOGO</button>
+    <!-- botão modificado: tenta abrir app / app store / fallback -->
+    <button class="inject" onclick="abrirFreeFire()">INJETAR FUNÇÕES NO JOGO</button>
+
     <div id="historico"><b>Histórico:</b></div>
   </div>
 
@@ -187,6 +149,7 @@
   <div class="watermark">@JM360hz</div>
 
   <script>
+    /* ---- Login (mesmo comportamento anterior) ---- */
     function login() {
       let user = document.getElementById("usuario").value;
       let pass = document.getElementById("senha").value;
@@ -218,6 +181,45 @@
     function mostrarPrecisao(valor) {
       document.getElementById("valorPrecisao").innerText = "Precisão: " + valor;
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
+    }
+
+    /* ---- Função para "abrir" Free Fire (alternativa 3) ----
+       Comportamento:
+        - Em Android tenta abrir via intent/market (se instalado abre o app ou loja)
+        - Em iOS abre link da App Store
+        - Em desktop/qualquer outro abre a página web da Play Store (fallback)
+       Nota: abrir app direto depende do dispositivo/registro de protocolo e pode não funcionar em todos os navegadores.
+    */
+    function abrirFreeFire() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+      const appStore = "https://apps.apple.com/app/free-fire/id1300146617"; // App Store (iOS) - fallback web
+      const officialSite = "https://ff.garena.com/"; // site oficial como fallback adicional
+
+      // Tenta detectar platforma
+      if (/android/i.test(ua)) {
+        // Primeiro tenta abrir via intent (Android). Se não abrir em 1s cai pro Play Store.
+        // Observação: comportamento depende do navegador (Chrome suporta intents).
+        const intentUrl = "intent://details?id=com.dts.freefireth#Intent;package=com.android.vending;scheme=market;end";
+        // Tenta abrir a intent
+        window.location = intentUrl;
+        // Fallback: se o app/intent não abrir, após 1000ms redireciona para Play Store web
+        setTimeout(function() {
+          window.location = playStoreWeb;
+        }, 1000);
+      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+        // iOS — abre App Store web link (não existe esquema universal garantido aqui)
+        window.location = appStore;
+      } else {
+        // Desktop ou não detectado: abre página oficial / Play Store web
+        // Abrimos em nova aba para não tirar a sessão do usuário automaticamente
+        window.open(officialSite, "_blank");
+        // também abrir Play Store web em outra aba (opcional)
+        // window.open(playStoreWeb, "_blank");
+      }
+
+      // registro no histórico visual do painel
+      mostrarMensagem("Tentando abrir Free Fire / redirecionando para a loja...");
     }
   </script>
 
