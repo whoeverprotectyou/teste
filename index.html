@@ -130,6 +130,22 @@
       background: #111;
       color: #00aaff;
     }
+
+    /* Barra de precisão */
+    #barraPrecisao {
+      height: 10px;
+      background: #222;
+      border-radius: 5px;
+      margin: 8px 0;
+      overflow: hidden;
+    }
+    #barraPrecisao span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: #00aaff;
+      transition: width 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -149,13 +165,13 @@
     <h1>AUXILIO BY @JM360HZ</h1>
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
     
-    <label><input type="checkbox" id="fps" checked onchange="toggleFPS()"> Ativar FPS</label>
-    <label><input type="checkbox" id="precisao" checked onchange="togglePrecisao()"> Ativar Precisão</label>
+    <label><input type="checkbox" id="fps" onchange="toggleFPS()"> Ativar FPS</label>
+    <label><input type="checkbox" id="precisao" onchange="togglePrecisao()"> Ativar Precisão</label>
 
     <label for="rangePrecisao">Precisão</label>
-    <input type="range" id="rangePrecisao" min="1" max="10" value="8" oninput="mostrarPrecisao(this.value)">
+    <input type="range" id="rangePrecisao" min="0" max="10" value="0" oninput="mostrarPrecisao(this.value)">
     <div id="barraPrecisao"><span></span></div>
-    <div id="valorPrecisao">Precisão: 8</div>
+    <div id="valorPrecisao">Precisão: 0</div>
 
     <select id="auxilio" onchange="mostrarMensagem('Auxílio selecionado: ' + this.value)">
       <option>Auxílio Head</option>
