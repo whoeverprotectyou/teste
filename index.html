@@ -172,22 +172,13 @@
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
     }
 
-    function abrirFreeFire() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefiremax"; 
-      const appStore = "https://apps.apple.com/app/free-fire-max/id1480517681"; 
-      const officialSite = "https://ffmax.garena.com/"; 
+   <script>
+  function abrirFreeFire() {
+    // Apenas registra no histórico, não tenta abrir app
+    mostrarMensagem("Funções injetadas com sucesso!");
+  }
+</script>
 
-      if (/android/i.test(ua)) {
-        window.location.href = "intent://launch/#Intent;package=com.dts.freefiremax;end";
-        setTimeout(() => { window.location.href = playStoreWeb; }, 1500);
-      } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        window.location.href = appStore;
-      } else {
-        window.open(officialSite, "_blank");
-      }
-
-      mostrarMensagem("Abrindo Free Fire MAX...");
     }
   </script>
 
@@ -219,3 +210,4 @@
   </script>
 </body>
 </html>
+
