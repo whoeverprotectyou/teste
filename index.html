@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Auxílio by @JM360hz</title>
+  <title>AUXILIO BY ZJM</title>
   <style>
     body {
       margin: 0;
@@ -121,8 +121,7 @@
 
   <!-- Conteúdo -->
   <div class="container" id="conteudo">
-    <img src="https://i.imgur.com/BKuB57R.png" alt="Logo" style="width:120px; display:block; margin: 0 auto 8px auto; opacity:0.8;">
-    <h1>AUXILIO BY @JM360HZ</h1>
+    <h1>AUXILIO BY ZJM</h1>
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
 
     <label><input type="checkbox" id="fps" onchange="toggleFPS()"> Ativar FPS</label>
@@ -146,10 +145,9 @@
   </div>
 
   <!-- Marca d'água -->
-  <div class="watermark">@JM360hz</div>
+  <div class="watermark">AUXILIO BY ZJM</div>
 
   <script>
-    /* ---- Login (mesmo comportamento anterior) ---- */
     function login() {
       let user = document.getElementById("usuario").value;
       let pass = document.getElementById("senha").value;
@@ -183,42 +181,22 @@
       document.querySelector("#barraPrecisao span").style.width = (valor * 10) + "%";
     }
 
-    /* ---- Função para "abrir" Free Fire (alternativa 3) ----
-       Comportamento:
-        - Em Android tenta abrir via intent/market (se instalado abre o app ou loja)
-        - Em iOS abre link da App Store
-        - Em desktop/qualquer outro abre a página web da Play Store (fallback)
-       Nota: abrir app direto depende do dispositivo/registro de protocolo e pode não funcionar em todos os navegadores.
-    */
     function abrirFreeFire() {
       const ua = navigator.userAgent || navigator.vendor || window.opera;
       const playStoreWeb = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
-      const appStore = "https://apps.apple.com/app/free-fire/id1300146617"; // App Store (iOS) - fallback web
-      const officialSite = "https://ff.garena.com/"; // site oficial como fallback adicional
+      const appStore = "https://apps.apple.com/app/free-fire/id1300146617";
+      const officialSite = "https://ff.garena.com/";
 
-      // Tenta detectar platforma
       if (/android/i.test(ua)) {
-        // Primeiro tenta abrir via intent (Android). Se não abrir em 1s cai pro Play Store.
-        // Observação: comportamento depende do navegador (Chrome suporta intents).
         const intentUrl = "intent://details?id=com.dts.freefireth#Intent;package=com.android.vending;scheme=market;end";
-        // Tenta abrir a intent
         window.location = intentUrl;
-        // Fallback: se o app/intent não abrir, após 1000ms redireciona para Play Store web
-        setTimeout(function() {
-          window.location = playStoreWeb;
-        }, 1000);
+        setTimeout(function() { window.location = playStoreWeb; }, 1000);
       } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-        // iOS — abre App Store web link (não existe esquema universal garantido aqui)
         window.location = appStore;
       } else {
-        // Desktop ou não detectado: abre página oficial / Play Store web
-        // Abrimos em nova aba para não tirar a sessão do usuário automaticamente
         window.open(officialSite, "_blank");
-        // também abrir Play Store web em outra aba (opcional)
-        // window.open(playStoreWeb, "_blank");
       }
 
-      // registro no histórico visual do painel
       mostrarMensagem("Tentando abrir Free Fire / redirecionando para a loja...");
     }
   </script>
