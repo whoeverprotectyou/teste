@@ -10,12 +10,10 @@
       font-family: Arial, sans-serif;
       color: #00aaff;
       text-align: center;
-      padding: 50px;
       background: #0d1117;
       overflow: hidden;
     }
 
-    /* fundo de partículas */
     #particles-js {
       position: fixed;
       top: 0;
@@ -35,13 +33,7 @@
       position: relative;
       z-index: 1;
       box-shadow: 0 0 20px rgba(0,170,255,0.4);
-    }
-
-    .logo {
-      width: 120px;
-      margin: 0 auto 15px auto;
-      opacity: 0.7;
-      display: block;
+      display: none; /* só aparece depois do login */
     }
 
     h1 {
@@ -74,8 +66,8 @@
       color: white;
     }
 
-    input[type="checkbox"] {
-      margin-right: 10px;
+    input[type="checkbox"], input[type="text"], input[type="password"] {
+      margin: 5px 0;
     }
 
     input[type="range"] {
@@ -100,53 +92,43 @@
       margin-top: 20px;
     }
 
-    /* Popup estilizado */
-    .popup {
+    /* Marca d'água */
+    .watermark {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(0,170,255,0.9);
-      color: black;
-      padding: 15px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      box-shadow: 0 0 20px rgba(0,170,255,0.7);
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 10;
-    }
-    .popup.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Histórico */
-    #historico {
-      margin-top: 20px;
-      text-align: left;
-      color: #aaa;
+      bottom: 10px;
+      right: 15px;
       font-size: 14px;
-      max-height: 120px;
-      overflow-y: auto;
-      border-top: 1px solid rgba(0,170,255,0.3);
-      padding-top: 10px;
+      color: rgba(0,170,255,0.3);
+      font-weight: bold;
+      pointer-events: none;
+      z-index: 5;
     }
 
-    /* Medidor de precisão */
-    #barraPrecisao {
-      height: 10px;
-      background: #222;
-      border-radius: 5px;
-      margin: 8px 0;
-      overflow: hidden;
+    /* Tela de login */
+    .login-container {
+      background: rgba(22, 27, 34, 0.95);
+      border-radius: 15px;
+      padding: 30px;
+      width: 90%;
+      max-width: 300px;
+      margin: 100px auto;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,170,255,0.4);
     }
-    #barraPrecisao span {
-      display: block;
-      height: 100%;
-      width: 0%;
-      background: #00aaff;
-      transition: width 0.3s ease;
+
+    .login-container h2 {
+      margin-bottom: 15px;
+      color: #00aaff;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: none;
+      background: #111;
+      color: #00aaff;
     }
   </style>
 </head>
@@ -154,19 +136,21 @@
   <!-- fundo partículas -->
   <div id="particles-js"></div>
 
-  <div class="container">
-    <img src="https://i.imgur.com/BKuB57R.png" alt="Logo" class="logo">
+  <!-- Tela de login -->
+  <div class="login-container" id="login">
+    <h2>Login</h2>
+    <input type="text" id="usuario" placeholder="Usuário">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+  </div>
 
+  <!-- Conteúdo -->
+  <div class="container" id="conteudo">
     <h1>AUXILIO BY @JM360HZ</h1>
-
     <button onclick="mostrarMensagem('Aimbot ativado')">Aimbot</button>
     
-    <label>
-      <input type="checkbox" id="fps" checked onchange="toggleFPS()"> Ativar FPS
-    </label>
-    <label>
-      <input type="checkbox" id="precisao" checked onchange="togglePrecisao()"> Ativar Precisão
-    </label>
+    <label><input type="checkbox" id="fps" checked onchange="toggleFPS()"> Ativar FPS</label>
+    <label><input type="checkbox" id="precisao" checked onchange="togglePrecisao()"> Ativar Precisão</label>
 
     <label for="rangePrecisao">Precisão</label>
     <input type="range" id="rangePrecisao" min="1" max="10" value="8" oninput="mostrarPrecisao(this.value)">
@@ -179,24 +163,26 @@
       <option>Auxílio Full</option>
     </select>
 
-    <button class="inject" onclick="mostrarMensagem('Funções injetadas')">
-      INJETAR FUNÇÕES NO JOGO
-    </button>
-
+    <button class="inject" onclick="mostrarMensagem('Funções injetadas')">INJETAR FUNÇÕES NO JOGO</button>
     <div id="historico"><b>Histórico:</b></div>
   </div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup"></div>
+  <!-- Marca d'água -->
+  <div class="watermark">@JM360hz</div>
 
   <script>
-    function mostrarMensagem(texto) {
-      let popup = document.getElementById("popup");
-      popup.innerText = texto;
-      popup.classList.add("show");
-      setTimeout(() => popup.classList.remove("show"), 2000);
+    function login() {
+      let user = document.getElementById("usuario").value;
+      let pass = document.getElementById("senha").value;
+      if (user === "admin" && pass === "1234") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("conteudo").style.display = "block";
+      } else {
+        alert("Usuário ou senha incorretos!");
+      }
+    }
 
-      // adiciona ao histórico
+    function mostrarMensagem(texto) {
       let historico = document.getElementById("historico");
       let item = document.createElement("div");
       item.innerText = "• " + texto;
@@ -248,5 +234,3 @@
   </script>
 </body>
 </html>
-
-
